@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://atugatran.github.io/FontAwesome6Pro/css/all.min.css">
+</head>
+
+<body>
+  <nav class="sidebar" [ngClass]="{ 'collapsed': !isSidebarOpen }" [@slideInOut]="sidebarState">
+    <div class="sidebar-logo px-4">
+      <a href="#" class="d-flex align-items-center text-decoration-none">
+        <img src="tulogo.png" alt="Logo" class="me-2">
+        <span class="fs-5 fw-bold">T.U</span>
+      </a>
+      <i class="sidebar-toggle "
+        [ngClass]="isSidebarOpen ? 'fa-duotone fa-solid fa-bars' : 'fa-duotone fa-solid fa-bars'"
+        (click)="toggleSidebar()"></i>
+    </div>
+
+    <ul class="nav flex-column">
+      <li *ngFor="let item of menuItems" class="nav-item">
+        <a href="#" class="nav-link" (click)="toggleSubMenu(item)">
+          <i class="bi {{ item.icon }} me-2"></i>
+          <span *ngIf="isSidebarOpen">{{ item.label }}</span>
+          <i *ngIf="item.subItems.length > 0"
+            [ngClass]="item.expanded ? 'fa-solid fa-square-chevron-down' : 'fa-solid fa-square-chevron-left'"
+            class="ms-auto"></i>
+        </a>
+
+        <ul *ngIf="item.expanded && item.subItems.length > 0" class="nav flex-column ps-4">
+          <li *ngFor="let subItem of item.subItems" class="nav-item">
+            <a href="#" class="nav-link" (click)="toggleSubSubMenu(subItem)">
+              <i class="{{ subItem.icon }} me-2"></i>
+              <span *ngIf="isSidebarOpen">{{ subItem.label }}</span>
+              <i *ngIf="subItem.subItems.length > 0"
+                [ngClass]="subItem.expanded ? 'fa-solid fa-square-chevron-down' : 'fa-solid fa-square-chevron-left'"
+                class="ms-auto"></i>
+            </a>
+
+            <ul *ngIf="subItem.expanded && subItem.subItems.length > 0" class="nav flex-column ps-4">
+              <li *ngFor="let subSubItem of subItem.subItems" class="nav-item">
+
+                <a href="#" class="nav-link">
+                  <i class="{{ subSubItem.icon }} me-2"></i>
+                  <span>{{ subSubItem.label }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+
+  </nav>
+  
+  <nav class="collapsed-navbar" *ngIf="!isSidebarOpen" >
+    <div class="collapsed-navbar-logo  d-flex justify-content-center">
+      
+      <i class="sidebar-toggle "
+        [ngClass]="isSidebarOpen ? 'fa-duotone fa-solid fa-bars' : 'fa-duotone fa-solid fa-bars'"
+        (click)="toggleSidebar()"></i>
+    </div>
+
+    <ul class="nav flex-column">
+      <li *ngFor="let item of menuItems" class="nav-item">
+        <a href="#" class="nav-link" (click)="toggleSubMenu(item)" [attr.data-label]="item.label">
+          <i class="bi {{ item.icon }}"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Bootstrap JS (Optional, for dropdowns, etc.) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
