@@ -4,8 +4,7 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   background-color: #0e7bc4;
   overflow-y: auto;
-  transform: translateX(0);
-  transition: transform 1s ease-in-out;
+
 }
 
 .sidebar-logo {
@@ -44,7 +43,10 @@
   align-items: center;
   gap: 1px;
 }
+.nav-item a::after{
+  background-color: #a52e72;
 
+}
 .nav-item a:hover {
   background-color: #f36528;
 }
@@ -54,14 +56,9 @@
   transition: margin 0.3s ease;
 }
 
-.sidebar.collapsed {
-  display: none;
-  transform: translateX(-100%); 
-}
 
 .collapsed-navbar {
   width: 60px;
-  transition: width 0.3s ease;
   background-color: #0e7bc4;
   height: 100vh;
   position: fixed;
@@ -107,4 +104,5 @@
   font-size: 0.9rem;
   z-index: 1000;
 }
+
 

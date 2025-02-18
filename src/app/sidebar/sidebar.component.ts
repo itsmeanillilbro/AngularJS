@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,19 +9,18 @@ import { trigger, transition, style, animate } from '@angular/animations';
   styleUrls: ['./sidebar.component.css'],
   imports: [CommonModule],
   animations: [
-    trigger('toggleMenu', [
-      transition(':enter', [
-        style({ transform: 'translateX(120%)' }),
-        animate('1s ease-in', style({ transform: 'translateX(0)' }))
-      ]),
-      transition(':leave', [
-        animate('1s ease-out', style({ transform: 'translateX(120%)' }))
-      ])
-    ])
+    trigger('slideInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      state('out', style({ transform: 'translateX(-100%)' })),
+      transition('in => out', animate('200ms ease-in-out')),
+      transition('out => in', animate('600ms ease-in-out'))
+    ]),
+    
   ],
   
 })
 export class SidebarComponent implements OnInit {
+  
   menuItems = [
     {
       label: 'Admin',
@@ -157,7 +156,9 @@ export class SidebarComponent implements OnInit {
   ];
 
   isSidebarOpen = true;
-
+  get sidebarState(): string {
+    return this.isSidebarOpen ? 'in' : 'out';
+  }
   constructor(private renderer: Renderer2) {}
 
   ngOnInit() {

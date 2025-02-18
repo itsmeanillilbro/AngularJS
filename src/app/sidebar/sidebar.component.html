@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <nav class="sidebar" [ngClass]="{ 'collapsed': !isSidebarOpen }" >
+  <nav class="sidebar" [ngClass]="{ 'collapsed': !isSidebarOpen }" [@slideInOut]="sidebarState">
     <div class="sidebar-logo px-4">
       <a href="#" class="d-flex align-items-center text-decoration-none">
         <img src="tulogo.png" alt="Logo" class="me-2">
@@ -57,7 +57,7 @@
 
   </nav>
   
-  <nav class="collapsed-navbar" *ngIf="!isSidebarOpen">
+  <nav class="collapsed-navbar" *ngIf="!isSidebarOpen" >
     <div class="collapsed-navbar-logo  d-flex justify-content-center">
       
       <i class="sidebar-toggle "
