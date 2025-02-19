@@ -15,14 +15,15 @@
         <img src="tulogo.png" alt="Logo" class="me-2">
         <span class="fs-5 fw-bold">T.U</span>
       </a>
-      <i class="sidebar-toggle "
+      <i class="sidebar-toggle"
         [ngClass]="isSidebarOpen ? 'fa-duotone fa-solid fa-bars' : 'fa-duotone fa-solid fa-bars'"
         (click)="toggleSidebar()"></i>
     </div>
 
     <ul class="nav flex-column">
-      <li *ngFor="let item of menuItems" class="nav-item">
-        <a href="#" class="nav-link" (click)="toggleSubMenu(item)">
+      <li *ngFor="let item of menuItems" class="nav-item" [ngClass]="{'active-menu': activeMenuItem === item}">
+        <a href="#" class="nav-link"
+          (click)="toggleSubMenu(item)">
           <i class="bi {{ item.icon }} me-2"></i>
           <span *ngIf="isSidebarOpen">{{ item.label }}</span>
           <i *ngIf="item.subItems.length > 0"
@@ -42,7 +43,6 @@
 
             <ul *ngIf="subItem.expanded && subItem.subItems.length > 0" class="nav flex-column ps-4">
               <li *ngFor="let subSubItem of subItem.subItems" class="nav-item">
-
                 <a href="#" class="nav-link">
                   <i class="{{ subSubItem.icon }} me-2"></i>
                   <span>{{ subSubItem.label }}</span>
@@ -53,13 +53,13 @@
         </ul>
       </li>
     </ul>
-
-
   </nav>
-  
-  <nav class="collapsed-navbar" *ngIf="!isSidebarOpen" >
+
+
+
+  <nav class="collapsed-navbar" *ngIf="!isSidebarOpen">
     <div class="collapsed-navbar-logo  d-flex justify-content-center">
-      
+
       <i class="sidebar-toggle "
         [ngClass]="isSidebarOpen ? 'fa-duotone fa-solid fa-bars' : 'fa-duotone fa-solid fa-bars'"
         (click)="toggleSidebar()"></i>

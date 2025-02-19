@@ -12,8 +12,8 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
     trigger('slideInOut', [
       state('in', style({ transform: 'translateX(0)' })),
       state('out', style({ transform: 'translateX(-100%)' })),
-      transition('in => out', animate('200ms ease-in-out')),
-      transition('out => in', animate('600ms ease-in-out'))
+      transition('in => out', animate('0ms ease-in-out')),
+      transition('out => in', animate('700ms ease-in-out'))
     ]),
     
   ],
@@ -156,9 +156,8 @@ export class SidebarComponent implements OnInit {
   ];
 
   isSidebarOpen = true;
-  get sidebarState(): string {
-    return this.isSidebarOpen ? 'in' : 'out';
-  }
+  activeMenuItem: any = null;
+
   constructor(private renderer: Renderer2) {}
 
   ngOnInit() {
@@ -177,6 +176,10 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  get sidebarState(): string {
+    return this.isSidebarOpen ? 'in' : 'out';
+  }
+
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
     if (!this.isSidebarOpen) {
@@ -187,6 +190,7 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleSubMenu(menuItem: any): void {
+    this.activeMenuItem = this.activeMenuItem === menuItem ? null : menuItem;
     menuItem.expanded = !menuItem.expanded;
   }
 

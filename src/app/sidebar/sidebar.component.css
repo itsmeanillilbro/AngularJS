@@ -1,10 +1,8 @@
 .sidebar {
   width: 230px;
-  height: 100vh;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   background-color: #0e7bc4;
-  overflow-y: auto;
-
+  
 }
 
 .sidebar-logo {
@@ -56,17 +54,26 @@
   transition: margin 0.3s ease;
 }
 
+.nav-item.active-menu {
+  background-color: #438fc3; 
+}
+
+
+
+.nav-item.active-menu .nav-item {
+  background-color: transparent;
+}
+
 
 .collapsed-navbar {
   width: 60px;
   background-color: #0e7bc4;
-  height: 100vh;
-  position: fixed;
+
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
-  max-height: 100vh;
-
+  
 }
 
 .collapsed-navbar .nav-link {
